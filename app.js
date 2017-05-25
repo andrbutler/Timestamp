@@ -2,6 +2,7 @@ var express = require('express');
 var app = express();
 
 app.use(express.static('public'));
+app.set('port', (process.env.PORT || 8080));
 app.get('/', function(req, resp){
 	resp.sendfile('index.html');
 });
@@ -71,4 +72,6 @@ app.get('/:date', function(req, resp){
 	+ ', ' + time.getFullYear();
 	resp.end(JSON.stringify(out));
 });
-app.listen(8080);
+app.listen(app.get('port'), function(){
+	console.log('app running on port: ' + app.get('port'))
+});

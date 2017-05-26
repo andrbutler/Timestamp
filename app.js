@@ -70,6 +70,11 @@ app.get('/:date', function(req, resp){
 	}
 	out.natural = month + ' ' + time.getDate()
 	+ ', ' + time.getFullYear();
+	if(!out.natural || !out.unix){
+		out.natural = null;
+		out.unix = null;
+		console.log('Invalid date');
+	}
 	resp.end(JSON.stringify(out));
 });
 app.listen(app.get('port'), function(){
